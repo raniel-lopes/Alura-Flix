@@ -38,7 +38,7 @@ const movieBackground = ({ movies, genreNamesByIds, currentIndex, navigate }) =>
             </div>
 
             <div className="z-10 px-8 md:px-10 lg:px-12 2xl:px-16 pb-8">
-                <div>
+                <div className="flex flex-col gap-3 justify-end min-h-homeSpaceFondo lg:min-h-homeSpaceFondoPC">
                     <div className="flex text-xs movieId:text-sm gap-4 text-white lg:text-lg lg:gap-6">
 
                     </div>
