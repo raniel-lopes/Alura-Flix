@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { CiPlay1 } from "react-icons/ci";
+import { flushSync } from 'react-dom';
 
-const movieBackground = ({ movies, genreNamesByIds, currentIndex, navigate }) => {
+
+const MovieBackground = ({ movies, genreNamesByIds, currentIndex, navigate }) => {
     const [imageUrl, setImageUrl] = useState(
         `https://image.tmdb.org/t/p/w780${movies?.[currentIndex]?.poster_path}`
     );
@@ -39,11 +42,34 @@ const movieBackground = ({ movies, genreNamesByIds, currentIndex, navigate }) =>
 
             <div className="z-10 px-8 md:px-10 lg:px-12 2xl:px-16 pb-8">
                 <div className="flex flex-col gap-3 justify-end min-h-homeSpaceFondo lg:min-h-homeSpaceFondoPC">
-                    <div className="flex text-xs movieId:text-sm gap-4 text-white lg:text-lg lg:gap-6">
+                    <h2 ref={movieTitle} className="text-white text-[1.875rem] font-semibold lg:text-[40px]" >
+                        {movies?.[currentIndex]?.original_name}
+                    </h2>
+                    <ul className="flex text-xs movieId:text-sm gap-4 text-white lg:text-lg lg:gap-6">
+                        {genreNamesByIds?.slice(0, 3).map((gere, index) => (
+                            <li key={index}>{genre}</li>
+                        ))}
+                    </ul>
 
-                    </div>
+                    <span
+                        className="mt-6 w-[40px]"
+                        onClick={() => {
+                            movieTitle.current.classList.add("full-title");
+                            document.startViewTransition(async () => {
+                                movieTitle.current.style.viewTransitionName = "";
+                                flushSync(() => navigate(`/tv/${movies?.[currentIndex].id}`));
+                            });
+                        }}
+                    >
+                        <CiPlay1 
+                            color="white"
+                            className="cursor-pointer w-[36px] h-[36px] lg:w-[40px] lg:h-[40px]"
+                        />
+                    </span>
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
+
+export default MovieBackground;
