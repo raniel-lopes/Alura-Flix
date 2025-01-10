@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Thunl assíncrono para buscar categorias de filmes/series
+// Define um thunk para buscar as categorias (antes chamados de gêneros)
 export const fetchCategories = createAsyncThunk(
     "categories/fetchCategories",
     async (contentType) => {
@@ -18,12 +18,12 @@ export const fetchCategories = createAsyncThunk(
 
 // Estado global para armazenar as categorias
 const categoriesSlice = createSlice({
-    name: "movieCategories", //Nome da slice alterado
+    name: "movieCategories", // Nome da slice alterado
     initialState: [],
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
-            //Armazena as categorias no estado global quando a solicitação for bem sucedida
+            // Armazena as categorias no estado global quando a solicitação for bem-sucedida
             return action.payload;
         });
     },
