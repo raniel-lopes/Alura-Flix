@@ -1,6 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { useNavigate } from "react-rounter-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Menu = ({ isShowMenu, onCloseMenu }) => {
     const navigate = useNavigate();
@@ -12,9 +12,8 @@ export const Menu = ({ isShowMenu, onCloseMenu }) => {
 
     return (
         <div
-            className={`fixed left-0 top-0 w-64 px-6 min-h-screen bg-navbar transition-transform duration-500 z-[70] ${
-                isShowMenu ? "translate-x-0" : "-translate-x-full"
-            }`}
+            className={`fixed left-0 top-0 w-64 px-6 min-h-screen bg-navbar transition-transform duration-500 z-[70] ${isShowMenu ? "translate-x-0" : "-translate-x-full"
+                }`}
         >
             <div className="h-20 flex items-center">
                 <IoMdClose
