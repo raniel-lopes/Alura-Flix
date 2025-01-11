@@ -13,10 +13,10 @@ const Slider = ({ path, titulo, subtitulo, query, isMovie }) => {
     const baseUrl = "https://api.themoviedb.org/3";
     const [movies, getMovies, isError, loading] = useFetch(baseUrl);
 
-    // obtener los datos de la api
+    // obtem os dados da api
     useEffect(() => {
         getMovies(path, query);
-    }, [path, query]);
+    }, []);
 
     return (
         <article className='text-white'>

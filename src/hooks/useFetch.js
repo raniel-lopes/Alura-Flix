@@ -6,17 +6,13 @@ const useFetch = (baseUrl) => {
     const [isError, setIsError] = useState(false); // Indica se houve erro
     const [loading, setLoading] = useState(false); // Indica se a requisição está carregando
 
-    /**
-     * Função para buscar dados da API
-     * @param {string} path - Caminho da API a ser requisitado
-     * @param {string} query - Query parameters adicionais
-     */
-    const getApi = (path, query = "") => {
+
+    const getApi = (path, query) => {
         const url = `${baseUrl}${path}?language=pt-BR&${query}`; // Adiciona o idioma PT-BR
 
         const headers = {
             Accept: "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`, // Usando variável de ambiente para token
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNjJlNzU3MDc1NzZmMmQ0ZDQ4ODYxNTRkYmM2N2ZmOSIsIm5iZiI6MTczNjUxNDE4OS43NDEsInN1YiI6IjY3ODExYThkMjE4ZmQ1N2FjZjRlYWUzYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ocdh3yqmndj5FnrIT9gqsxLUoSiF4C4Igx3vBBaUWrQ', // Usando variável de ambiente para token
         };
 
         setLoading(true); // Inicia o carregamento

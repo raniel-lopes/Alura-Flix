@@ -7,7 +7,7 @@ import AdBanner2 from "../Componentes/Home/AdBanner2"
 import Button from "../Componentes/Button";
 import Slider from "../Componentes/Slider";
 import useFetch from "../hooks/useFetch";
-import { fetchCategories } from "../appState/slices/categoriesSlice";
+import { fetchGenres } from "../appState/slices/genresSlice";
 import { setHomeValue } from "../appState/slices/homeMovieSlice";
 
 
@@ -20,21 +20,24 @@ const HomePage = () => {
     // Estados Globais e hooks
     const dispatch = useDispatch();
     const genres = useSelector((state) => state.genresMovies);
-    const [popularMovies, fetchMovies, isError, isLoading] = useFetch(baseUrl);
+
+    const [popularMovies, getMovies, isError, isLoading] = useFetch(baseUrl);
 
     useEffect(() => {
-        fetchMovies(path);
+        getMovies(path);
     }, []);
 
     useEffect(() => {
         if (!genres.length) {
-            dispatch(fetchCategories("tv"));
+            dispatch(fetchGenres("tv"));
         }
         dispatch(setHomeValue(popularMovies));
     }, [genres, popularMovies]);
 
     if (isLoading) {
-        return <LoadingHome />;
+        return (
+            <LoadingHome />
+        );
     }
 
     return (
