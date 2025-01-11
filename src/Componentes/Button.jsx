@@ -1,4 +1,4 @@
-import { PiVideo } from 'react-icons/pi'
+import { PiVideo } from "react-icons/pi";
 import './Style/btn.css'
 import { useNavigate } from 'react-router-dom'
 const Button = ({ text, noNavigate }) => {

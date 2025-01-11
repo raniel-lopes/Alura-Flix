@@ -1,40 +1,41 @@
 import axios from "axios";
-import { useState } from "react"
+import { useState } from "react";
 
 const useFetch = (baseUrl) => {
-    const [data, setData] = useState(null); //Armazena os dados que a API retorna
-    const [error, setError] = useState(false); //Indica se ocorreu algum erro
-    const [isLoading, setLoading] = useState(false); //Indica se a requisição está em andamento
+    const [infoApi, setInfoApi] = useState(null); // Armazena os dados retornados pela API
+    const [isError, setIsError] = useState(false); // Indica se houve erro
+    const [loading, setLoading] = useState(false); // Indica se a requisição está carregando
 
     /**
-    * Função para buscar dados da API
-    * @param {string} path - Caminho da API a ser requisitado
-    * @param {string} query - Query parameters adicionais
-    */
-
-    const fetchData = (path, query = "") => {
-        const url = `${baseUrl}${path}?language=pt-BR&${query}`; //Idioma PT-BR adicionado
+     * Função para buscar dados da API
+     * @param {string} path - Caminho da API a ser requisitado
+     * @param {string} query - Query parameters adicionais
+     */
+    const getApi = (path, query = "") => {
+        const url = `${baseUrl}${path}?language=pt-BR&${query}`; // Adiciona o idioma PT-BR
 
         const headers = {
             Accept: "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`, //Usando váriaveis de ambiente
+            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`, // Usando variável de ambiente para token
         };
 
-        setIsLoading(true); //Inicia o carregamento
+        setLoading(true); // Inicia o carregamento
+
+        // Requisição GET com Axios
         axios
             .get(url, { headers })
-            .then((response) => {
-                setData(response.data); //Armazena os dados retornados
-                setError(false); //Reseta o estado de erro
+            .then((res) => {
+                setInfoApi(res.data); // Armazena os dados retornados
+                setIsError(false); // Reseta o estado de erro
             })
             .catch((err) => {
-                console.error(`Erro na requisição ${err}`);
-                setError(true); //Define o estado de erro
+                console.error(`Erro na requisição: ${err}`); // Exibe erro no console
+                setIsError(true); // Define que houve erro
             })
-            .finally(() => setIsLoading(false)); // Finaliza o estado de carregamento
+            .finally(() => setLoading(false)); // Finaliza o estado de carregamento
     };
 
-    return [data, fetchData, error, isLoading]
+    return [infoApi, getApi, isError, loading]; // Retorna os dados, função, erro e estado de carregamento
 };
 
 export default useFetch;

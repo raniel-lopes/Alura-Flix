@@ -2,10 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import useFetch from "../hooks/useFetch";
 import SliderMovie from "./SliderMovie";
-import {
-    MdKeyboardArrowLeft,
-    MdOutlineKeyboardArrowRight,
-} from "react-icons/md";
+import { MdKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const Slider = ({ path, titulo, subtitulo, query, isMovie }) => {
 
@@ -19,7 +16,7 @@ const Slider = ({ path, titulo, subtitulo, query, isMovie }) => {
     // obtener los datos de la api
     useEffect(() => {
         getMovies(path, query);
-    }, []);
+    }, [path, query]);
 
     return (
         <article className='text-white'>

@@ -18,7 +18,7 @@ export const fetchCategories = createAsyncThunk(
 
 // Estado global para armazenar as categorias
 const categoriesSlice = createSlice({
-    name: "movieCategories", // Nome da slice alterado
+    name: "homeMovies", // Nome da slice alterado
     initialState: [],
     reducers: {},
     extraReducers: (builder) => {
@@ -28,6 +28,7 @@ const categoriesSlice = createSlice({
         });
     },
 });
+
 
 // Exporta o reducer, o qual será usado na configuração da store
 export const selectCategories = (state) => state.categories;

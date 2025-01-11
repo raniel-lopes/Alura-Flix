@@ -7,8 +7,10 @@ import AdBanner2 from "../Componentes/Home/AdBanner2"
 import Button from "../Componentes/Button";
 import Slider from "../Componentes/Slider";
 import useFetch from "../hooks/useFetch";
-import { fetchGenres } from "../appState/slices/categoriesSlice"
+import { fetchCategories } from "../appState/slices/categoriesSlice";
 import { setHomeValue } from "../appState/slices/homeMovieSlice";
+
+
 
 const HomePage = () => {
     //Configurações da API
@@ -26,7 +28,7 @@ const HomePage = () => {
 
     useEffect(() => {
         if (!genres.length) {
-            dispatch(fetchGenres("tv"));
+            dispatch(fetchCategories("tv"));
         }
         dispatch(setHomeValue(popularMovies));
     }, [genres, popularMovies]);
@@ -41,7 +43,7 @@ const HomePage = () => {
             {!isLoading && !isError && (
                 <main>
                     {/* Slider Principal */}
-                    <MovieCarousel movies={popularMovies$.results} genres={genres} />
+                    <MovieCarousel movies={popularMovies?.results} genres={genres} />
 
                     {/* Anúncio */}
                     <section className="px-8 md:px-10 lg:px-12 2xl:px-16 mt-8 text-white sm:text-center md:flex md:text-left md:gap-8 md:items-center md:flex-row-reverse md:justify-center xl:gap-20">
